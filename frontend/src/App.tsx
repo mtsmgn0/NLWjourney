@@ -8,11 +8,12 @@ import {
   AtSign,
   Plus,
 } from "lucide-react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export function App() {
   const [isGuestInputOpen, setIsGuestInputOpen] = useState(false);
   const [isGuestPopupOpen, setIsGuestPopupOpen] = useState(false);
+  const [emailsToInvite, setEmailsToInvite] = useState([""]);
 
   function openGuestPopup() {
     setIsGuestPopupOpen(true);
@@ -28,6 +29,30 @@ export function App() {
 
   function closeGuestInput() {
     setIsGuestInputOpen(false);
+  }
+
+  function addEmailToEnvite(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const data = new FormData(event.currentTarget);
+    const email = data.get("email")?.toString();
+
+    if (!email) {
+      return;
+    }
+
+    if (emailsToInvite.includes(email)) {
+      return;
+    }
+
+    setEmailsToInvite([...emailsToInvite, email]);
+
+    event.currentTarget.reset();
+  }
+  function removeEmailToEnvite(emailToRemove: string) {
+    const aux = emailsToInvite.filter((email) => email != emailToRemove);
+    setEmailsToInvite(aux);
+    return;
   }
   return (
     <div className="h-screen flex justify-center items-center bg-boxBg bg-no-repeat bg-center">
@@ -140,57 +165,38 @@ export function App() {
             {/* bloco que sera preenchido pelos emails */}
             <div className="gap-2 flex flex-wrap">
               {/* email ilustrativo falso */}
-              <div className="bg-zinc-800 py-1.5 px-2.5 rounded-md flex items-center space-x-2.5">
-                <span>exemplo.inventado@gmail.com</span>
-                <button>
-                  <X className="text-zinc-400 size-4" />
-                </button>
-              </div>
-
-              <div className="bg-zinc-800 py-1.5 px-2.5 rounded-md flex items-center space-x-2.5">
-                <span>exemplo.inventado@gmail.com</span>
-                <button>
-                  <X className="text-zinc-400 size-4" />
-                </button>
-              </div>
-
-              <div className="bg-zinc-800 py-1.5 px-2.5 rounded-md flex items-center space-x-2.5">
-                <span>exemplo.inventado@gmail.com</span>
-                <button>
-                  <X className="text-zinc-400 size-4" />
-                </button>
-              </div>
-
-              <div className="bg-zinc-800 py-1.5 px-2.5 rounded-md flex items-center space-x-2.5">
-                <span>exemplo.inventado@gmail.com</span>
-                <button>
-                  <X className="text-zinc-400 size-4" />
-                </button>
-              </div>
-
-              <div className="bg-zinc-800 py-1.5 px-2.5 rounded-md flex items-center space-x-2.5">
-                <span>exemplo.inventado@gmail.com</span>
-                <button>
-                  <X className="text-zinc-400 size-4" />
-                </button>
-              </div>
-
-              <div className="bg-zinc-800 py-1.5 px-2.5 rounded-md flex items-center space-x-2.5">
-                <span>exemplo.inventado@gmail.com</span>
-                <button>
-                  <X className="text-zinc-400 size-4" />
-                </button>
-              </div>
+              {emailsToInvite.map((email) => {
+                if (email != "") {
+                  return (
+                    <div
+                      key={email}
+                      className="bg-zinc-800 py-1.5 px-2.5 rounded-md flex items-center space-x-2.5"
+                    >
+                      <span>{email}</span>
+                      <button onClick={() => removeEmailToEnvite(email)}>
+                        <X className="text-zinc-400 size-4" />
+                      </button>
+                    </div>
+                  );
+                }
+              })}
             </div>{" "}
             <div className="max-w-xl h-px w-full bg-zinc-800" />
-            <form className="max-w-xl w-full bg-zinc-950 flex items-center rounded-lg px-4 py-2.5 border border-zinc-800 space-x-2.5">
+            <form
+              onSubmit={addEmailToEnvite}
+              className="max-w-xl w-full bg-zinc-950 flex items-center rounded-lg px-4 py-2.5 border border-zinc-800 space-x-2.5"
+            >
               <AtSign className="text-zinc-400 size-5" />
               <input
-                type="text"
+                type="email"
+                name="email"
                 placeholder="Digite o e-mail do convidado"
                 className="bg-transparent outline-none flex-1"
               />
-              <button className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 space-x-2 flex items-center hover:bg-lime-400">
+              <button
+                type="submit"
+                className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 space-x-2 flex items-center hover:bg-lime-400"
+              >
                 Convidar
                 <Plus className="size-5" />
               </button>
