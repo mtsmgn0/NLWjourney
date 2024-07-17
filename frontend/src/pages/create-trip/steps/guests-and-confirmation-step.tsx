@@ -1,4 +1,5 @@
 import { ArrowRight, UserRoundPlus } from "lucide-react";
+import { Button } from "../../../components/button";
 
 interface GuestsAndConfirmationStepProps {
   isGuestPopupOpen: boolean;
@@ -34,14 +35,10 @@ export function GuestsAndConfirmationStep({
       </div>
 
       <div className="h-6 w-px bg-zinc-800" />
-      <button
-        onClick={openConfirmTripModal}
-        disabled={isGuestPopupOpen}
-        className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 space-x-2 flex items-center hover:bg-lime-400"
-      >
+      <Button onClick={openConfirmTripModal} disabled={isGuestPopupOpen}>
         Confirmar viagem
         <ArrowRight />
-      </button>
+      </Button>
     </div>
   );
 }

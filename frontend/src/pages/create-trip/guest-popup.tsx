@@ -1,5 +1,6 @@
 import { AtSign, Plus, X } from "lucide-react";
 import { FormEvent } from "react";
+import { Button } from "../../components/button";
 
 interface GuestPopupProps {
   closeGuestPopup: () => void;
@@ -62,13 +63,13 @@ export function GuestPopup({
             placeholder="Digite o e-mail do convidado"
             className="bg-transparent outline-none flex-1"
           />
-          <button
+          <Button
             type="submit"
             className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 space-x-2 flex items-center hover:bg-lime-400"
           >
             Convidar
             <Plus className="size-5" />
-          </button>
+          </Button>
         </form>
       </div>
     </div>

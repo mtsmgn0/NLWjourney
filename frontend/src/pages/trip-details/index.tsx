@@ -1,10 +1,11 @@
-import { Calendar, CircleCheck, MapPin, Plus, Settings2 } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useState } from "react";
 import { CreateActivityModal } from "./create-activity-modal";
 import { ImportantLinks } from "./important-links";
 import { InvitedGuests } from "./invited-guests";
 import { ActivityList } from "./activity-list";
 import { DestinationAndDateHeader } from "./destination-and-date-header";
+import { Button } from "../../components/button";
 
 export function TripDetailsPage() {
   const [isCreateActivityModalOpen, setCreateActivityModalOpen] =
@@ -27,13 +28,10 @@ export function TripDetailsPage() {
           <div className="flex justify-between items-center">
             <h2 className="text-zinc-50 text-4xl font-semibold">Atividades</h2>
 
-            <button
-              onClick={openCreateActivityModal}
-              className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 space-x-2 flex items-center text-base hover:bg-lime-400 gap-2"
-            >
+            <Button onClick={openCreateActivityModal}>
               <Plus className="size-5" />
               Cadastrar atividade
-            </button>
+            </Button>
           </div>
           <ActivityList />
         </div>
