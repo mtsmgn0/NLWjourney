@@ -1,25 +1,22 @@
-import { Mail, User } from "lucide-react";
-import { FormEvent } from "react";
+import { User, Mail } from "lucide-react";
 import { Button } from "../../components/button";
 import { Input } from "../../components/input";
 import { Modal } from "../../components/modal";
 
-interface ConfirmTripModalProps {
-  closeConfirmTripModal: () => void;
-  createTrip: (event: FormEvent<HTMLFormElement>) => void;
+interface ManageGuestsModalProps {
+  closeManageGuestsModal: () => void;
 }
 
-export function ConfirmTripModal({
-  closeConfirmTripModal,
-  createTrip,
-}: ConfirmTripModalProps) {
+export function ManageGuestsModal({
+  closeManageGuestsModal,
+}: ManageGuestsModalProps) {
   return (
     <Modal
-      closeModal={closeConfirmTripModal}
-      title="Confirmar criação de viagem"
+      closeModal={closeManageGuestsModal}
+      title="Confirmar participação"
       description={
         <>
-          Para concluir a criação da viagem para{" "}
+          Você foi convidado(a) para participar de uma viagem para{" "}
           <span className="text-zinc-100 font-semibold">
             Florianópolis, Brasil
           </span>{" "}
@@ -30,19 +27,16 @@ export function ConfirmTripModal({
           preencha seus dados abaixo:
         </>
       }
-      onSubmit={createTrip}
     >
       <Input type="text" name="userName" placeholder="Seu nome completo">
         <User className="text-zinc-400 size-5" />
       </Input>
 
-      <Input type="email" name="email" placeholder="Seu e-mail pessoal">
+      <Input type="email" name="email" placeholder="Seu e-mail">
         <Mail className="text-zinc-400 size-5" />
       </Input>
 
-      <Button type="submit" size="full">
-        Confirmar criação de viagem
-      </Button>
+      <Button size="full">Confirmar minha presença</Button>
     </Modal>
   );
 }

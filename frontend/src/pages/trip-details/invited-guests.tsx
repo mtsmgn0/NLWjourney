@@ -1,7 +1,11 @@
 import { CircleDashed, UserCog } from "lucide-react";
 import { Button } from "../../components/button";
 
-export function InvitedGuests() {
+interface InvitedGuestsProps {
+  openManageGuestsModal: () => void;
+}
+
+export function InvitedGuests({ openManageGuestsModal }: InvitedGuestsProps) {
   return (
     <div className="space-y-6">
       <h2 className="text-zinc-50 text-xl ">Convidados</h2>
@@ -16,7 +20,7 @@ export function InvitedGuests() {
         <CircleDashed className="ml-auto text-zinc-400 size-5 shrink-0" />
       </div>
 
-      <Button variant="secondary" size="full">
+      <Button onClick={openManageGuestsModal} variant="secondary" size="full">
         <UserCog className="text-zinc-200 size-5" />
         Gerenciar convidados
       </Button>

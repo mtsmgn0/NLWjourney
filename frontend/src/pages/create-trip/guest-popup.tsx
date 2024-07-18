@@ -65,7 +65,6 @@ export function GuestPopup({
           />
           <Button
             type="submit"
-            className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 space-x-2 flex items-center hover:bg-lime-400"
           >
             Convidar
             <Plus className="size-5" />
